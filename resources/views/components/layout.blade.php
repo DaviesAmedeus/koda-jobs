@@ -40,18 +40,31 @@
           <li class="nav-item"><a class="nav-link" href="/companies">Companies</a></li>
         </ul>
 
+
+
+
         <!-- Auth Buttons -->
-        <div class="d-flex">
-          <a href="/login" class="btn btn-outline-primary me-2">Login</a>
-          <a href="/register" class="btn btn-primary">Register</a>
-        </div>
+        @auth
+        <form action="/logout" method="POST">
+            @csrf
+            <button class="btn btn-outline-primary me-2">Logout</button>
+        </form>
+        @endauth
+       @guest
+       <div class="d-flex">
+        <a href="/login" class="btn btn-outline-primary me-2">Login</a>
+        <a href="/register" class="btn btn-primary">Register</a>
+      </div>
+       @endguest
       </div>
     </div>
   </nav>
 
-
-<!-- Hero -->
-<!-- Hero -->
+  @if (session('success'))
+  <div class="alert alert-success text-center mb-0 rounded-0">
+    {{ session('success') }}
+  </div>
+@endif
 <div class="main">
 {{ $slot }}
 </div>

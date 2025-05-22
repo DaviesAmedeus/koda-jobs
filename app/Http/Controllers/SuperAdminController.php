@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class JobController extends Controller
+class SuperAdminController extends Controller
 {
     public function index(){
-        return view('website.jobs.index');
+        return view('superadmin.dashboard');
     }
 }

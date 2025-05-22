@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 class CompaniesController extends Controller
 {
     public function index(){
-        return view('companies.index');
+        return view('website.companies.index');
     }
 
     public function profile(){
-        return view('companies.profile');
+        return view('website.companies.profile');
     }
 }

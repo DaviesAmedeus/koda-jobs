@@ -1,5 +1,3 @@
-@props(['title'])
-
 <!doctype html>
 <html lang="en">
 
@@ -15,17 +13,7 @@
 </head>
 
 <body>
-    <div class="form-screen">
-        <a href="/" class="spur-logo"><b>Koda-Jobs</b></a>
-        <div class="card account-dialog">
-            <div class="card-header bg-primary text-white text-center">{{ $title }}</div>
-            <div class="card-body">
-                {{ $slot }}
-            </div>
-        </div>
-
-
-    </div>
+    {{ $slot }}
     <script>
         function toggleEmployerFields(){
             const role = document.querySelector('input[name="role"]:checked').value;

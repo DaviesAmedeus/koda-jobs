@@ -1,16 +1,25 @@
-<x-auth.auth-layout title="Login">
-    <form action="/login" method="POST" >
+<x-panel.layout>
+    <div class="form-screen">
+        <a href="/" class="spur-logo"><b>Koda-Jobs</b></a>
+        <div class="card account-dialog">
+            <div class="card-header bg-primary text-white text-center">Login</div>
+            <div class="card-body">
+                <form action="/login" method="POST">
+                    @csrf
+                    <div class="py-2">
+                        <x-panel.forms.input placeholder='Email' type="email" name="email" />
+                        <x-panel.forms.input placeholder='Password' type="password" name="password" />
+                    </div>
 
-       <div class="py-2">
-        <x-auth.auth-input placeholder='Email' type="email" name="email" />
-        <x-auth.auth-input placeholder='Password' type="password" name="password" />
-       </div>
-
-       <x-auth.auth-button redirectTitle="Dont have an account?" redirect="/register">Login</x-auth.auth-button>
-
+                    <x-panel.forms.button redirectTitle="Dont have an account?"
+                        redirect="/register">Login</x-panel.forms.button>
+                </form>
+            </div>
+        </div>
 
 
-    </form>
+    </div>
 
 
-</x-auth.auth-layout>
+
+</x-panel.layout>
