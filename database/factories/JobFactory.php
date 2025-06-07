@@ -16,8 +16,14 @@ class JobFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            //
+         return [
+           'title'=> fake()->jobTitle(),
+           'positions' => fake()->numberBetween(1, 25),
+           'description'=>'Thank you for considering my application. I am eager for the opportunity to discuss how my background aligns with',
+           'salary'=> fake()->randomElement([1000000, 500000, 300000, 1500000]),
+           'location'=> fake()->randomElement(['Tanzania', 'Zanzibar', 'Kenya']),
+           'type'=> 'Part Time',
+           'deadline'=> fake()->dateTime(),
         ];
     }
 }

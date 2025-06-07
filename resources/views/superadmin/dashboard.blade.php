@@ -1,5 +1,10 @@
 <x-panel.dash>
     <div class="container-fluid">
+          @if (session('success'))
+  <div class="alert alert-success text-center mb-4 rounded-0">
+   <strong> {{ session('success') }}</strong>
+  </div>
+@endif
         <div class="row dash-row">
             <div class="col-xl-4">
                 <div class="stats stats-primary">

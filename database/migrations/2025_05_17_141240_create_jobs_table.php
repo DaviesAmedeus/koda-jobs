@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Employer;
 use App\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Employer::class);
             $table->string('title');
-            $table->string('position');
+            $table->integer('positions');
             $table->string('description');
             $table->decimal('salary', 10, 2);
             $table->string('location');

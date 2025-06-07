@@ -5,6 +5,15 @@
         <div class="card account-dialog">
             <div class="card-header bg-primary text-white text-center">Register</div>
             <div class="card-body">
+                @if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li class="text-danger">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                 <form action="/register" method="POST" enctype="multipart/form-data">
                     @csrf
 
@@ -43,7 +52,7 @@
                         <x-panel.forms.input placeholder='Website url' name="website" />
 
                         <x-panel.forms.input placeholder="Short Description of the company......" :textarea="true"
-                            name="description" />
+                            name="bio" />
 
                         <x-panel.forms.file label="Company Logo" name="logo" />
 

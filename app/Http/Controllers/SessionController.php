@@ -34,7 +34,7 @@ class SessionController extends Controller
         // Redirect
         $user = Auth::user();
         if ($user->hasRole('superAdmin')) {
-           return redirect()->route('superadmin.dashboard')->with('success', 'Congrats! You are now logged In.');
+           return redirect()->route('superadmin.dashboard')->with('success', "Welcome Back Super Admin! You are now logged In.");
         }
         if ($user->hasRole('jobSeeker')) {
             return redirect('/')->with('success', 'Congrats! You are now logged In.');

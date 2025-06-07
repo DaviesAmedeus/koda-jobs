@@ -10,58 +10,59 @@ use Illuminate\Validation\Rules\File;
 
 class RegisteredUserController extends Controller
 {
-    public function create(){
+    public function create()
+    {
         return view('auth.register');
     }
 
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $rules = [
             // User fields
             'name' => ['required', 'max:50'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'confirmed'],
-            'role' =>'required|in:jobSeeker,employer'
+            'role' => 'required|in:jobSeeker,employer'
 
         ];
 
-       if($request->role==='employer'){
-       $rules = array_merge($rules, [
-            // Company/Employer fields
-            'company_name'=>['required', 'max:50'],
-            'website'=>['required'],
-            'description'=>['required'],
-            'logo'=>['nullable',  File::types(['png', 'jpg', 'jpeg', 'webp'])]
+        if ($request->role === 'employer') {
+            $rules = array_merge($rules, [
+                // Company/Employer fields
+                'company_name' => ['required', 'max:50'],
+                'website' => ['required'],
+                'bio' => ['required'],
+                'logo' => ['nullable',  File::types(['png', 'jpg', 'jpeg', 'webp'])]
+            ]);
+        }
+
+
+        $attributes = $request->validate($rules);
+        $user = User::create([
+            'name' => $attributes['name'],
+            'email' => $attributes['email'],
+            'role' => $attributes['role'],
+            'password' => $attributes['password'],
         ]);
-       }
 
 
-       $attributes= $request->validate($rules);
-      $user = User::create([
-        'name'=>$attributes['name'],
-        'email'=>$attributes['email'],
-        'role'=>$attributes['role'],
-        'password'=>$attributes['password'],
-       ]);
+        $user->assignRole($attributes['role']);
 
+        if ($attributes['role'] === 'employer') {
+            if (!empty($attributes['logo'])) {
+                $logoPath = $attributes['logo']->store('logos');
+            }
 
-       $user->assignRole($attributes['role']);
-
-       if($attributes['role'] === 'employer'){
-           if(!empty($attributes['logo'])){
-               $logoPath = $attributes['logo']->store('logos');
-           }
-
-           $user->employer()->create([
-               'name' => $request['employer'],
-               'logo' => $logoPath
-           ]);
-       }
-       Auth::login($user);
-       return redirect('/');
-
-
-
+            $user->employer()->create([
+                'company_name' => $request->company_name,
+                'bio' => $request->bio,
+                'website' => $request->website,
+                'logo' => $logoPath
+            ]);
+        }
+        Auth::login($user);
+        return redirect('/');
     }
 }

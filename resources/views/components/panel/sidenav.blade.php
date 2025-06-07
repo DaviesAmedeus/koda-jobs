@@ -1,4 +1,4 @@
- <div class="dash-nav dash-nav-dark">
+ <div class="dash-nav dash-nav-dark ">
      <header>
          <a href="#!" class="menu-toggle">
              <i class="fas fa-bars"></i>
