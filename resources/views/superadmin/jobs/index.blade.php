@@ -6,8 +6,7 @@
             </div>
 
             <div class="col-md-6 " style="text-align: end">
-                <a  href="/super-admin/jobs/create" class="btn btn-primary btn-lg mb-1"
-                    > <i class="fas fa-plus"></i></a>
+                <a href="/super-admin/jobs/create" class="btn btn-primary btn-lg mb-1"> <i class="fas fa-plus"></i></a>
             </div>
         </div>
         @if (session('success'))
@@ -16,68 +15,57 @@
             </div>
         @endif
         <div class="row">
+            <x-panel.table-wrap>
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">Position</th>
+                        <th scope="col">Salary (TZS)</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">dealine</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            <div class="col col-lg-12">
-                <div class="card spur-card">
+                    @forelse  ($jobs as $job)
+                        <tr>
+                            <th scope="row">{{ $job->title }}</th>
+                            <td>{{ $job->employer->company_name }}</td>
+                            <td>{{ $job->positions }}</td>
+                            <td>{{ $job->salary }}/=</td>
+                            <td>{{ $job->type }}</td>
+                            <td>{{ $job->deadline }}</td>
 
-                    <div class="card-body ">
-                        <div class="table-responsive align-middle">
-                            <table class="table table-hover table-in-card">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Title</th>
-                                        <th scope="col">Company</th>
-                                        <th scope="col">Position</th>
-                                        <th scope="col">Salary at</th>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">dealine</th>
-                                        <th scope="col">Action</th>
+                            <td class="">
+                                <div class="d-flex pb-3">
+                                    <a href="/super-admin/jobs/{{ $job->id }}/edit"
+                                        class="btn btn-primary mr-3">Update</a>
+                                    <form action="/super-admin/jobs/{{ $job->id }}/destroy" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
 
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach ($jobs as $job)
-                                        <tr>
-                                            <th scope="row">{{ $job->title }}</th>
-                                            <td>{{ $job->employer->company_name }}</td>
-                                            <td>{{ $job->positions }}</td>
-                                            <td>{{ $job->salary }}</td>
-                                            <td>{{ $job->type }}</td>
-                                            <td>{{ $job->deadline }}</td>
-
-                                            <td class="">
-                                                <div class="d-flex pb-3">
-                                                    <a href="/super-admin/edit"
-                                                        class="btn btn-primary mr-3">Update</a>
-                                                    <form action="/super-admin/destroy"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
-
-                                                </div>
-                                            </td>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr><td class="text-center" colspan="100%">No Data found</td></tr>
+                    @endforelse
 
 
 
-                                        </tr>
-                                    @endforeach
+                </tbody>
+
+            </x-panel.table-wrap>
 
 
-
-
-                                </tbody>
-                            </table>
-
-
-
-                        </div>
-                    </div>
-                </div>
+            <div class="col">
+                {{ $jobs->links() }}
             </div>
+
         </div>
 
     </div>

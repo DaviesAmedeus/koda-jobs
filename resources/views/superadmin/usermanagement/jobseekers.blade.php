@@ -8,63 +8,51 @@
         @endif
         <div class="row">
 
-            <div class="col col-lg-12">
-                <div class="card spur-card">
 
-                    <div class="card-body ">
-                        <div class="table-responsive align-middle">
-                            <table class="table table-hover table-in-card">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Full Name</th>
-                                        <th scope="col">email</th>
-                                        <th scope="col">Applications</th>
-                                        <th scope="col">Created at</th>
-                                        <th scope="col">Updated at</th>
-                                        <th scope="col">Actions</th>
+            <x-panel.table-wrap>
+                <thead>
+                    <tr>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Applications</th>
+                        <th scope="col">Created at</th>
+                        <th scope="col">Updated at</th>
+                        <th scope="col">Actions</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
+                    </tr>
+                </thead>
+                <tbody>
 
-                                    @foreach ($jobSeekers as $jobSeeker)
-                                        <tr>
-                                            <th scope="row">{{ $jobSeeker->name }}</th>
-                                            <td>{{ $jobSeeker->email }}</td>
-                                            <td>7 Applications</td>
-                                            <td>{{ $jobSeeker->created_at }}</td>
-                                            <td>{{ $jobSeeker->updated_at }}</td>
-                                            <td class="">
-                                                <div class="d-flex pb-3">
-                                                   <a href="/super-admin/{{ $jobSeeker->id }}/edit"
-                                                        class="btn btn-primary mr-3">Update</a>
-                                                        <form action="/super-admin/{{ $jobSeeker->id }}/destroy" method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </form>
+                    @foreach ($jobSeekers as $jobSeeker)
+                        <tr>
+                            <th scope="row">{{ $jobSeeker->name }}</th>
+                            <td>{{ $jobSeeker->email }}</td>
+                            <td>7 Applications</td>
+                            <td>{{ $jobSeeker->created_at }}</td>
+                            <td>{{ $jobSeeker->updated_at }}</td>
+                            <td class="">
+                                <div class="d-flex pb-3">
+                                    <a href="/super-admin/{{ $jobSeeker->id }}/edit"
+                                        class="btn btn-primary mr-3">Update</a>
+                                    <form action="/super-admin/{{ $jobSeeker->id }}/destroy" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
 
-                                                </div>
-                                            </td>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </x-panel.table-wrap>
 
-
-
-                                        </tr>
-                                    @endforeach
-
-
-
-
-                                </tbody>
-                            </table>
-
-                            <!-- Modal -->
-                            <x-panel.user-modal />
-
-                        </div>
-                    </div>
-                </div>
+            <div class="col">
+                {{ $jobSeekers->links() }}
             </div>
+
+            <!-- Modal -->
+            <x-panel.user-modal />
         </div>
 
     </div>

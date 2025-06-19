@@ -6,15 +6,12 @@
                 <strong> {{ session('success') }}</strong>
             </div>
         @endif
+
+         
         <div class="row">
 
-            <div class="col col-lg-12">
-                <div class="card spur-card">
-
-                    <div class="card-body ">
-                        <div class="table-responsive align-middle">
-                            <table class="table table-hover table-in-card">
-                                <thead>
+            <x-panel.table-wrap>
+    <thead>
                                     <tr>
                                         <th scope="col">Full Name</th>
                                         <th scope="col">email</th>
@@ -59,14 +56,16 @@
 
 
                                 </tbody>
-                            </table>
+            </x-panel.table-wrap>
 
-                            <!-- Modal -->
-                            <x-panel.user-modal />
-                        </div>
-                    </div>
-                </div>
+
+
+            <div class="col">
+                {{ $employers->links() }}
             </div>
+
+            <!-- Modal -->
+                            <x-panel.user-modal />
         </div>
 
     </div>

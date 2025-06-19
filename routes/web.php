@@ -10,10 +10,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobSeekerController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\Demos\FilePreviewController;
 
 
 
 Route::get('/', HomeController::class);
+
 
 
 
@@ -37,12 +39,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/job-seeker/dashboard', [JobSeekerController::class, 'index'])->name('jobseeker.dashboard');
 });
 
-
-
-
-
-
-
 // Auth
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create']);
@@ -58,3 +54,7 @@ Route::post('/logout', [SessionController::class, 'destroy'])->middleware('auth'
 
 // fallback
 Route::fallback(fn() => view('fallback'));
+
+
+//Demo/Test routes
+Route::get('/file-preview/{fileName}', [FilePreviewController::class, 'filePreview']);

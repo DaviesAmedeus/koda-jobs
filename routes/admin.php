@@ -25,17 +25,15 @@ Route::middleware('auth')->prefix('super-admin')->group(function () {
             Route::delete('/{user}/destroy', 'destroy');
         });
 
-        // Jobs
+    // Jobs
     Route::controller(JobController::class)
         ->group(function () {
             Route::get('/jobs', 'index');
             Route::get('/jobs/create', 'create');
             Route::post('/jobs/store', 'store');
-            Route::get('/jobs/{job}/edit', 'edit');
-            Route::patch('/jobs/{job}/update', 'update');
-            Route::delete('/jobs/{job}/destroy', 'destroy');
 
+            Route::get('/jobs/{job}/edit', 'edit');
+            Route::patch('/jobs/{job}/update', 'update')->name('jobs.update');
+            Route::delete('/jobs/{job}/destroy', 'destroy');
         });
 });
-
-
